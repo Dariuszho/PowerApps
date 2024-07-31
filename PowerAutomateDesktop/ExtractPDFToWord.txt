@@ -1,0 +1,7 @@
+Display.ShowMessageDialog.ShowMessageWithTimeout Title: $fx'You will promote to insert file ' Message: $fx'Please choose your file ' Icon: Display.Icon.Information Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: False Timeout: $fx'=5' ButtonPressed=> ButtonPressed
+Display.SelectFileDialog.SelectFile Title: $fx'Insert File Path' IsTopMost: False CheckIfFileExists: False SelectedFile=> SelectedFile
+Pdf.ExtractTextFromPDF.ExtractText PDFFile: $fx'=SelectedFile' DetectLayout: False ExtractedText=> ExtractedPDFText
+Word.LaunchWord.Launch Visible: True Instance=> WordInstance
+Word.WriteToWord.WriteStartOfDocument Instance: $fx'=WordInstance' Text: $fx'=ExtractedPDFText' AppendNewLine: False
+Display.InputDialog Title: $fx'Insert Document Name ' Message: $fx'It will save into Documents Folder' DefaultValue: $fx'ExtractedPDF' InputType: Display.InputType.SingleLine IsTopMost: False UserInput=> UserInput ButtonPressed=> ButtonPressed2
+Word.CloseWord.CloseAndSaveAs Instance: $fx'=WordInstance' DocumentFormat: Word.WordFormat.DOCX DocumentPath: $fx'${UserInput}'
